@@ -1,4 +1,4 @@
 (ns shared-resource.models.user
-  (:require [clj-ldap.client :as ldap]))
+  (:use shared-resource.models.authentication))
 
-(def ldap-server (ldap/connect {:host "ldap.example.com"}))
+

@@ -1,0 +1,8 @@
+#############################
+# LDAP Config
+############################
+
+ldap.host = localhost
+ldap.port = 389
+ldap.user = 
+ldap.pass = 

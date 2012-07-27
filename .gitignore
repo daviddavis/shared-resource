@@ -6,3 +6,4 @@ pom.xml
 .cake
 *.class
 target
+resources/config.properties
