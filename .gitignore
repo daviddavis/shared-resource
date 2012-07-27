@@ -5,5 +5,4 @@ pom.xml
 .lein-deps-sum
 .cake
 *.class
-
-*.class
+target
