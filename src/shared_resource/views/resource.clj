@@ -2,8 +2,8 @@
   (:use noir.core
         hiccup.core
         hiccup.page)
-  (:require [noir-shared-resource.shared-resource :as shared-resource]
-            [noir-shared-resource.views.common :as common]
+  (:require [shared-resource.models.resource :as resource]
+            [shared-resource.views.common :as common]
             [noir.response :as resp]))
 
 ;; Partials
@@ -11,12 +11,13 @@
 (defpartial resource [{:keys [perma-link name description start-time end-time] :as resource-item}]
             (when resource-item
               [:li.resource-item
-               [:h2 (link-to perma-link name)]
+               ;[:h2 (link-to perma-link name)]
                [:ul.time
                 [:li start-time]
                 [:li end-time]
                 (when (user/admin?)
-                  [:li (link-to (resource/edit-url post) "edit")])]
+                  ;[:li (link-to (resource/edit-url post) "edit")]
+;               )]
                [:div.content description]]))
 
 (defpartial resources-page [resources]
