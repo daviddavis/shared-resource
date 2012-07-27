@@ -28,4 +28,4 @@
 
 ;; Page structure
 (defpage "/resources/" []
-         (resources-page (shared-resource/get-all)))
+         (resources-page (resource/get-all)))
