@@ -8,7 +8,7 @@
 
 ;; Partials
 
-(defpartial resource [{:keys [perma-link name description start-time end-time] :as resource-item}]
+(defpartial resource-list [{:keys [perma-link name description start-time end-time] :as resource-item}]
             (when resource-item
               [:li.resource-item
                ;[:h2 (link-to perma-link name)]
@@ -23,9 +23,11 @@
 (defpartial resources-page [resources]
             (common/layout
               [:ul.resources
-               (map resource resources)]
+               (map resource-list resources)]
               ))
 
 ;; Page structure
-(defpage "/resources/" []
-         (resources-page (resource/get-all)))
+
+(defpage "/" []
+  (html (str (resource/get-all))))
+
