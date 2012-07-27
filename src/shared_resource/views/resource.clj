@@ -21,7 +21,7 @@
                [:div.content description]]))
 
 (defpartial resources-page [resources]
-            (common/main-layout
+            (common/layout
               [:ul.resources
                (map resource resources)]
               ))
