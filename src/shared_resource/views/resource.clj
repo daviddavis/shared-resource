@@ -15,13 +15,13 @@
                [:ul.time
                 [:li start-time]
                 [:li end-time]
-                (when (user/admin?)
-                  ;[:li (link-to (resource/edit-url post) "edit")]
-;               )]
+                ;;(when (user/admin?)
+                                        ;[:li (link-to (resource/edit-url post) "edit")])
+                ]
                [:div.content description]]))
 
 (defpartial resources-page [resources]
-            (common/main-layout
+            (common/layout
               [:ul.resources
                (map resource resources)]
               ))
