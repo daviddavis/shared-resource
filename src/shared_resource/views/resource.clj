@@ -1,8 +1,8 @@
 (ns shared-resource.views.resource
   (:use noir.core
         hiccup.core
-        hiccup.page-helpers)
-  (:require [noir-shared-resource.shared-resoure :as shared-resource]
+        hiccup.page)
+  (:require [noir-shared-resource.shared-resource :as shared-resource]
             [noir-shared-resource.views.common :as common]
             [noir.response :as resp]))
 
