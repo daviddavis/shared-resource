@@ -6,3 +6,12 @@ ldap.host = localhost
 ldap.port = 389
 ldap.user = 
 ldap.pass = 
+
+############################
+# Datomic
+############################
+
+datomic.host = localhost
+datomic.port = 4334
+datomic.database = shared-resource
+datomic.edition = free
