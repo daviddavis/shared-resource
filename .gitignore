@@ -7,3 +7,4 @@ pom.xml
 *.class
 target
 resources/config.properties
+.DS_Store
