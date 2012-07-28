@@ -2,16 +2,16 @@
   (:use [datomic.api :only (q db) :as d]
         [shared-resource.config]))
 
-(defn db-config [key]
+(defn datomic-config [key]
   (config-value (str "datomic." key)))
 
-(def uri (str "datomic:" (db-config "edition") "://" (db-config "host") ":" (db-config "port") "/" (db-config "database")))
+(defn uri [db-config] (str "datomic:" (db-config "edition") "://" (db-config "host") ":" (db-config "port") "/" (db-config "database")))
 
 (defn create-database []
-  (d/create-database uri))
+  (d/create-database (uri datomic-config)))
 
 (defn load-schema []
-  (let [conn (d/connect uri)]
+  (let [conn (d/connect (uri datomic-config))]
     (do
       ;; schema for users
       (println "Creating user schema")
@@ -82,7 +82,7 @@
          :db.install/_attribute :db.part/db}]))))
 
 (defn create-user [username full-name]
-  (let [conn (d/connect uri)]
+  (let [conn (d/connect (uri datomic-config))]
     (d/transact
      conn
      [{:db/id #db/id [:db.part/user]
@@ -90,9 +90,9 @@
      :user/name full-name}])))
 
 (defn get-all-usernames []
-  (let [conn (d/connect uri)]
+  (let [conn (d/connect (uri datomic-config))]
     (q '[:find ?n :where [?c user/username ?n ]] (db conn))))
 
 (defn find-user [username]
-  (let [conn (d/connect uri)]
+  (let [conn (d/connect (uri datomic-config))]
     (first (first (q `[:find ?c :where [?c user/username ~username]] (db conn))))))
