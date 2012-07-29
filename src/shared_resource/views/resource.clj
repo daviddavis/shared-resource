@@ -20,16 +20,12 @@
                             :as resource-item}
                            ]
   (when resource-item
-    [:li.resource-item
-     [:h2 (link-to perma-link name)]
-     [:div.content description]
-     [:ul.time
-      [:li start-time]
-      [:li end-time]
-      ;;(when (user/admin?)
+  [:li.resource-item
+   [:h2 name]
+   [:div.content description]
+   ;;(when (user/admin?)
                                         ;[:li (link-to (resource/edit-url post) "edit")])
-      ]
-     ]))
+   ]))
 
 (defpartial resources-page [resources]
   (common/layout
@@ -40,4 +36,4 @@
 ;; Page structure
 
 (defpage "/" []
-  (resource-list resource/get-all))
+  (resources-page (resource/get-all)))
