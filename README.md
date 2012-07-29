@@ -7,13 +7,20 @@ A website written in noir.
 If you use cake, substitute 'lein' with 'cake' below. Everything should work fine.
 
 ```bash
+git clone https://github.com/daviddavis/shared-resource.git
+cd shared-resource
 lein deps
+cp resources/config.properties.example resources/config.properties
+```
+configure /resources/config.properties for your Datomic database and LDAP server.
+```bash
+./create-db.sh
 lein run
 ```
 
 ## License
 
-Copyright (C) 2011 FIXME
+Copyright (C) 2012
 
 Distributed under the Eclipse Public License, the same as Clojure.
 
