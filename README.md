@@ -12,7 +12,7 @@ cd shared-resource
 lein deps
 cp resources/config.properties.example resources/config.properties
 ```
-configure /resources/config.properties for your Datomic database and LDAP server.
+configure resources/config.properties for your Datomic database and LDAP server.
 ```bash
 ./create-db.sh
 lein run
