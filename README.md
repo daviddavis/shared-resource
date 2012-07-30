@@ -18,9 +18,14 @@ configure resources/config.properties for your Datomic database and LDAP server.
 lein run
 ```
 
+## Contributors
+
+* [Mike Simpson](https://github.com/mjs2600) (mjs2600)
+* [David Davis](https://github.com/daviddavis) (daviddavis)
+
 ## License
 
-Copyright (C) 2012
+Copyright (C) 2012 SciMed Solutions, Inc.
 
 Distributed under the Eclipse Public License, the same as Clojure.
 
