@@ -25,7 +25,7 @@ lein run
 
 ## License
 
-Copyright (C) 2012 SciMed Solutions, Inc.
+Copyright &copy; 2012 SciMed Solutions, Inc.
 
 Distributed under the Eclipse Public License, the same as Clojure.
 
