@@ -1,6 +1,6 @@
 # shared-resource
 
-A website written in noir. 
+Shared resource is a web application that facilitates the sharing of resources (e.g. conference rooms, software licenses, etc.).
 
 ## Usage
 
