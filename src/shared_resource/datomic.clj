@@ -30,6 +30,12 @@
          :db/valueType :db.type/string
          :db/cardinality :db.cardinality/one
          :db/doc "A user's full name"
+         :db.install/_attribute :db.part/db}
+        {:db/id #db/id[:db.part/db]
+         :db/ident :user/email
+         :db/valueType :db.type/string
+         :db/cardinality :db.cardinality/one
+         :db/doc "A user's email address"
          :db.install/_attribute :db.part/db}])
 
       ;; schema for resources
