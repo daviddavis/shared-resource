@@ -40,4 +40,4 @@
           (if save-user (find-or-create-user (auth/user-attributes user-entry)))
           true)
         false)
-      (false))))
+      false)))
