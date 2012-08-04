@@ -90,14 +90,6 @@
 
 ;; This should really be abstracted and model specific code should be moved to
 ;; that model.
-(defn create-user [username full-name]
-  (let [conn (d/connect (uri datomic-config))]
-    (d/transact
-     conn
-     [{:db/id #db/id [:db.part/user]
-     :user/username username
-       :user/name full-name}])))
-
 (defn create-resource [resource-name description]
   (let [conn (d/connect (uri datomic-config))]
     (d/transact
@@ -106,14 +98,6 @@
        :resource/name resource-name
        :resource/description description}])))
 
-(defn get-all-usernames []
-  (let [conn (d/connect (uri datomic-config))]
-    (q '[:find ?n :where [?c user/username ?n ]] (db conn))))
-
 (defn get-all-resources []
   (let [conn (d/connect (uri datomic-config))]
     (q '[:find ?n ?a ?b :where [?n :resource/name ?a] [?n :resource/description ?b]] (db conn))))
-
-(defn find-user [username]
-  (let [conn (d/connect (uri datomic-config))]
-    (first (first (q `[:find ?c :where [?c user/username ~username]] (db conn))))))
