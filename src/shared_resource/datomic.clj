@@ -117,3 +117,13 @@
 (defn find-user [username]
   (let [conn (d/connect (uri datomic-config))]
     (first (first (q `[:find ?c :where [?c user/username ~username]] (db conn))))))
+
+(defn find-resource [id]
+(let [conn (d/connect (uri datomic-config))
+      entity (datomic.api/entity (db conn) id)]
+  {
+   :name (:resource/name entity)
+   :description (:resource/description entity)
+   }
+  )
+)

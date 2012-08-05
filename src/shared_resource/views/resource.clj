@@ -3,7 +3,7 @@
         hiccup.core
         hiccup.page
         hiccup.element)
-  (:require [shared-resource.models.resource :as resource]
+  (:require [shared-resource.models.resource :as r]
             [shared-resource.views.common :as common]
             [noir.response :as resp]))
 
@@ -11,21 +11,31 @@
 
 (defpartial resource-list [
                            {:keys [
-                                   perma-link
+                                   id
                                    name
                                    description
-                                   start-time
-                                   end-time
                                    ]
                             :as resource-item}
                            ]
   (when resource-item
   [:li.resource-item
-   [:h2 name]
+   [:h2 (link-to  (str "resources/" id) name)]
    [:div.content description]
    ;;(when (user/admin?)
-                                        ;[:li (link-to (resource/edit-url post) "edit")])
    ]))
+
+
+(defpartial show-resource [
+                           {:keys [
+                                   name
+                                   description
+                                   ]
+                            :as resource-item}
+                           ]  
+  [:h2 name]
+  [:div.content description]
+  ;;(when (user/admin?)
+  )
 
 (defpartial resources-page [resources]
   (common/layout
@@ -33,7 +43,16 @@
     (map resource-list resources)]
    ))
 
+
+(defpartial resource-page [resource]
+  (common/layout
+   (show-resource resource))) 
+
 ;; Page structure
 
-(defpage "/" []
-  (resources-page (resource/get-all)))
+ (defpage "/resources" []
+   (resources-page (r/get-all)))
+
+(defpage "/resources/:id" {:keys [id]}
+  (resource-page (r/get-by-id id)))
+

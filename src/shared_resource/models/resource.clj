@@ -13,4 +13,8 @@
 
 
 (defn get-all []
-  (map (partial zipmap '(:id :name :description)) (db/get-all-resources))) 
+  (map (partial zipmap '(:id :name :description)) (db/get-all-resources)))
+
+(defn get-by-id [id]
+  (db/find-resource (read-string id))
+  )
