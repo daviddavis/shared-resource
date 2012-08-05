@@ -4,8 +4,12 @@
 
 ldap.host = localhost
 ldap.port = 389
-ldap.user = 
-ldap.pass = 
+ldap.user =
+ldap.pass =
+ldap.email-field =
+ldap.username-field =
+ldap.full-name-field =
+ldap.connection-string =
 
 ############################
 # Datomic
