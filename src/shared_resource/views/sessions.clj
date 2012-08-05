@@ -32,11 +32,12 @@
     (resp/redirect "/sessions/new")))
 
 (defpage "/sessions/new" []
-  (login-page ""))
+  (if (session/get :username) (resp/redirect "/") (login-page "")))
 
 (defpage [:post "/sessions"] {:keys [username password]}
   (if (user/login? username password)
     (do
+      (session/clear!)
       (session/put! :username username)
       (session/flash-put! :success "Successfully logged in.")
       (resp/redirect "/"))
