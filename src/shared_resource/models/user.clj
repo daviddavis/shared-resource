@@ -35,9 +35,7 @@
   ([username password] (login? username password false))
   ([username password save-user]
     (if-let [user-entry (auth/find-user username)]
-      (if (auth/authenticate? user-entry password)
-        (do
-          (if save-user (find-or-create-user (auth/user-attributes user-entry)))
-          true)
-        false)
+      (when (auth/authenticate? user-entry password)
+        (if save-user (find-or-create-user (auth/user-attributes user-entry)))
+        true)
       false)))
