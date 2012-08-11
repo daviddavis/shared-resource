@@ -17,8 +17,7 @@
     (q '[:find ?n :where [?c user/username ?n ]] (db conn))))
 
 (defn find-user [username]
-  (let [conn (d/connect (uri datomic-config))]
-    (first (first (q `[:find ?c :where [?c user/username ~username]] (db conn))))))
+  (first (first (execute `[:find ?c :where [?c user/username ~username]]))))
 
 (defn destroy-user [username]
   (let [conn (d/connect (uri datomic-config))]
