@@ -35,7 +35,7 @@
   (if (session/get :username) (resp/redirect "/") (login-page "")))
 
 (defpage [:post "/sessions"] {:keys [username password]}
-  (if (user/login? username password)
+  (if (user/login? username password true)
     (do
       (session/clear!)
       (session/put! :username username)
