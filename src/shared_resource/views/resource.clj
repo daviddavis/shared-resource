@@ -4,9 +4,9 @@
         hiccup.page
         hiccup.element)
   (:require [shared-resource.models.resource :as r]
-            [shared-resource.models.reservation :as resv]
+            [shared-resource.models.reservation :as reservation]
             [shared-resource.views.common :as common]
-            [shared-resource.views.reservations :as rp]
+            [shared-resource.views.reservations :as rpage]
             [noir.response :as resp]))
 
 ;; Partials
@@ -37,6 +37,13 @@
   [:h2 name]
   [:div.content description]
   ;;(when (user/admin?)
+  [:h2 "Reservations"]
+  [:div.reservations
+    (let [reservations (reservation/get-by-resource-id (:id resource-item))]
+      (if (> (count reservations) 0)
+        (rpage/reservation-list (reservation/get-by-resource-id (:id resource-item)))
+        [:span "No reservations have been made."])
+    )]
   )
 
 (defpartial resources-page [resources]
@@ -48,7 +55,7 @@
 
 (defpartial resource-page [resource]
   (common/layout
-   (show-resource resource))) 
+   (show-resource resource)))
 
 ;; Page structure
 

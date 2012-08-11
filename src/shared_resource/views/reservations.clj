@@ -12,9 +12,9 @@
 (defpartial reservation-div [reservation]
   (when reservation
     [:div.reservation
-     [:div.start (:reservation/startTime reservation)]
-     [:div.end   (:reservation/endTime reservation)]
-     [:div.user  (:reservation/user reservation)]]))
+     [:div.start (:start-time reservation)]
+     [:div.end   (:end-time reservation)]
+     [:div.user  (:user/name (:user reservation))]]))
 
 (defpartial reservation-list [reservations]
   [:div.reservations (map reservation-div reservations)])

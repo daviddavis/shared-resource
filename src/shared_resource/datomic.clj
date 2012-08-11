@@ -114,6 +114,7 @@
 (defn find-resource [id]
   (let [entity (find-entity id)]
     {
+     :id (:db/id entity)
      :name (:resource/name entity)
      :description (:resource/description entity)
      }
