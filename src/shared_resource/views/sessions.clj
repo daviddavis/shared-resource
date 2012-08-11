@@ -19,7 +19,7 @@
       (submit-button "Login"))))
 
 (defn logged-in? []
-  (not (nil? (session/get :username))))
+  (not (nil? (session/get :user))))
 
 ;; Routes
 
@@ -27,18 +27,18 @@
   (when-not (logged-in?)
     (resp/redirect "/sessions/new")))
 
-(pre-route "/resources/*" {}
+(pre-route "/resources*" {}
   (when-not (logged-in?)
     (resp/redirect "/sessions/new")))
 
 (defpage "/sessions/new" []
-  (if (session/get :username) (resp/redirect "/") (login-page "")))
+  (if (session/get :user) (resp/redirect "/") (login-page "")))
 
 (defpage [:post "/sessions"] {:keys [username password]}
   (if (user/login? username password true)
     (do
       (session/clear!)
-      (session/put! :username username)
+      (session/put! :user (user/find-by-username username))
       (session/flash-put! :success "Successfully logged in.")
       (resp/redirect "/"))
     (do
