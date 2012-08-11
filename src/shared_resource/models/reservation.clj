@@ -14,3 +14,7 @@
 
 (defn get-all []
   (map (partial zipmap '(:id :user :resource :start :end)) (get-all-reservations)))
+
+(defn get-by-resource-id [resource-id]
+  (find-reservation 
+   (first (first (db/execute `[:find ?n :where [?n reservation/resource ~resource-id]])))))

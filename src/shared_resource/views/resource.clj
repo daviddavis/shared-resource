@@ -4,7 +4,9 @@
         hiccup.page
         hiccup.element)
   (:require [shared-resource.models.resource :as r]
+            [shared-resource.models.reservation :as resv]
             [shared-resource.views.common :as common]
+            [shared-resource.views.reservations :as rp]
             [noir.response :as resp]))
 
 ;; Partials
@@ -23,7 +25,6 @@
    [:div.content description]
    ;;(when (user/admin?)
    ]))
-
 
 (defpartial show-resource [
                            {:keys [
@@ -59,3 +60,5 @@
 (defpage "/resources/:id" {:keys [id]}
   (resource-page (r/get-by-id id)))
 
+;(defpage "/resource/:id/reservations" {:keys [id]}
+;  (resource-reservation-page (r/get-by-id id) (resv/get-by-resource-id id)))
