@@ -11,6 +11,7 @@
 
 ;; Partials
 
+
 (defpartial resource-list [
                            {:keys [
                                    id
@@ -55,6 +56,7 @@
    (resources-page (r/get-all)))
 
 (defpage "/" []
+  (noir.cljs.core/include-scripts)
   (resources-page (r/get-all)))
 
 (defpage "/resources/:id" {:keys [id]}
