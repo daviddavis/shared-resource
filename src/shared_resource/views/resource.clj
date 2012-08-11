@@ -53,6 +53,9 @@
  (defpage "/resources" []
    (resources-page (r/get-all)))
 
+(defpage "/" []
+  (resources-page (r/get-all)))
+
 (defpage "/resources/:id" {:keys [id]}
   (resource-page (r/get-by-id id)))
 
