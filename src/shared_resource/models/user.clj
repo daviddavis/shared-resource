@@ -16,15 +16,15 @@
   (let [conn (d/connect (uri datomic-config))]
     (q '[:find ?n :where [?c user/username ?n ]] (db conn))))
 
-;(defn destroy-user [username]
-  ;(let [conn (d/connect (uri datomic-config))]
-    ;(d/transact
-     ;conn
-     ;[[:db.fn/retractEntity (find-user username)]])))
-
 (defn find-user [username]
   (let [conn (d/connect (uri datomic-config))]
     (first (first (q `[:find ?c :where [?c user/username ~username]] (db conn))))))
+
+(defn destroy-user [username]
+  (let [conn (d/connect (uri datomic-config))]
+    (d/transact
+     conn
+     [[:db.fn/retractEntity (find-user username)]])))
 
 (defn find-or-create-user [{:keys [username full-name email]}]
   (if-let [user-record (find-user username)]
