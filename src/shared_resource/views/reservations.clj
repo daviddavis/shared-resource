@@ -5,6 +5,7 @@
         hiccup.element
         hiccup.form)
   (:require [shared-resource.models.reservation :as reservation]
+            [shared-resource.models.resource :as resource]
             [shared-resource.views.common :as common]
             [noir.response :as resp]
             [noir.session :as session]))
@@ -19,19 +20,32 @@
 (defpartial reservation-list [reservations]
   [:div.reservations (map reservation-div reservations)])
 
-(defpartial new-reservation-page [start end resource]
-  [:div.new-reservation])
+(defn resource-options []
+  (map #(conj [] (:name %) (:id %)) (resource/get-all)))
+
+(defpartial new-reservation-page [resource start end]
+  (common/layout
+    (form-to [:post "/reservations"]
+      (label "resource" "Resource: ")
+      (drop-down "resource" (resource-options) (Long/parseLong resource))
+      (label "start" "Start: ")
+      (text-field "start")
+      (label "end" "End: ")
+      (text-field "end")
+      (submit-button "Submit"))))
 
 ;; Routes
 
-(defpage "/reservations/new" []
-  (new-reservation-page "" "" ""))
+(defpage "/reservations/new" {:keys [resource]}
+  (new-reservation-page resource "" ""))
 
-(defpage [:post "/reservations"] {:keys [start end resource]}
-  (if (reservation/create-reservation resource (session/get :user) start end)
-    (do
-      (session/flash-put! :success "Successfully create reservation.")
-      (resp/redirect (str "/resources/" resource)))
-    (do
-      (session/flash-put! :error "Failed to log in.")
-      (new-reservation-page start end resource))))
+(defpage [:post "/reservations"] {:keys [resource start end]}
+  (let [resource-id (Long/parseLong resource)
+        user-id     (session/get :user)]
+    (if (reservation/create-reservation resource-id user-id start end)
+      (do
+        (session/flash-put! :success "Successfully create reservation.")
+        (resp/redirect (str "/resources/" resource)))
+      (do
+        (session/flash-put! :error "Failed to save reservation.")
+        (new-reservation-page start end resource)))))

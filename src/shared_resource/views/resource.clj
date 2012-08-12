@@ -44,6 +44,8 @@
         (rpage/reservation-list (reservation/get-by-resource-id (:id resource-item)))
         [:span "No reservations have been made."])
     )]
+  [:div.actions
+    (link-to (str "/reservations/new?resource=" (:id resource-item)) "Create a reservartion")]
   )
 
 (defpartial resources-page [resources]
