@@ -29,9 +29,9 @@
       (label "resource" "Resource: ")
       (drop-down "resource" (resource-options) (Long/parseLong resource))
       (label "start" "Start: ")
-      (text-field "start")
+      (text-field  {:class "date-time-picker"} "start")
       (label "end" "End: ")
-      (text-field "end")
+      (text-field {:class "date-time-picker"} "end")
       (submit-button "Submit"))))
 
 ;; Routes
